@@ -1,0 +1,10 @@
+<%= form_with(model: @task_list, local: true) do |f| %>
+    <%= f.label :リストの追加 %>
+    <%= f.text_field :content %>
+    
+    <%= f.submit "作成", class: "btn btn-primary" %>
+<% end %>
+
+<% @lists.each do |list| %>
+  <div><%= link_to list.content, task_list_path(list.id) %></div>
+<% end %>
