@@ -1,7 +1,4 @@
 class TaskListsController < ApplicationController
-  def new
-    @list = TaskList.new
-  end
   
   def index
     # form-tagのmodel名と揃える必要がある

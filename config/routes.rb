@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :tasks
   resources :task_lists
   resources :users
+  resources :comments
 end

@@ -9,9 +9,9 @@
 
 <h1>未処理タスク</h1>
 <% @task_false.each do |task| %>
-  <div><%= check_box_tag '', '', task.status, {'data-id' => task.id} %> <%= task.content %></div>
+  <div><%= check_box_tag '', '', task.status, {'data-id' => task.id} %> <%= link_to task.content, comment_path(task.id) %></div>
 <% end %>
 <h1>終了タスク</h1>
 <% @task_true.each do |task| %>
-  <div><%= check_box_tag '', '', task.status, {'data-id' => task.id} %> <%= task.content %></div>
+  <div><%= check_box_tag '', '', task.status, {'data-id' => task.id} %> <%= link_to task.content, comment_path(task.id) %></div>
 <% end %>

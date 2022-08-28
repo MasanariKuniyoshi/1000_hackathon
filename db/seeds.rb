@@ -37,7 +37,7 @@ end
 
 # サンプルコメントの作成(一番初めのユーザー用)
 10.times do |n|
-  task = rand(1..5)
+  task = rand(1..10)
   Comment.create!(content: "comment-#{n+1}",
                   user_id: 1,
                   task_id: task)
@@ -45,7 +45,7 @@ end
 
 # サンプルコメントの作成(他ユーザー用)
 10.times do |n|
-  task = rand(1..5)
+  task = rand(1..10)
   user = rand(1..5)
   Comment.create!(content: "comment-#{n+1}",
                   user_id: user,

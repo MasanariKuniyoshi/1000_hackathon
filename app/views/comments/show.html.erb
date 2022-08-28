@@ -1,0 +1,13 @@
+<h1>Comments</h1>
+<%= form_with(model: @comment, local: true) do |f| %>
+    <%= f.label :コメントの追加 %>
+    <%= f.text_field :content %>
+    
+    <%= f.submit "作成", class: "btn btn-primary" %>
+<% end %>
+
+<% @contents.each do |comment| %>
+    <p><%= comment.user.name %></p>
+    <p><%= comment.content %></p>
+    <hr>
+<% end %>
