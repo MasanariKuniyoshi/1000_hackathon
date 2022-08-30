@@ -22,23 +22,30 @@ class TasksController < ApplicationController
     end
   end
   
-  def show
-    tasks = Task.all
+  # def show
+  #   tasks = Task.all
     
-    # false true　それぞれを入れう空配列を作る
-    @task_false = []
-    @task_true = []
+  #   # false true　それぞれを入れう空配列を作る
+  #   @task_false = []
+  #   @task_true = []
     
-    # false true それぞれ条件に合うものに入れ込む
-    tasks.each {|task| @task_false.push(task) if task.status == false }
-    tasks.each {|task| @task_true.push(task) if task.status == true }
-  end
+  #   # false true それぞれ条件に合うものに入れ込む
+  #   tasks.each {|task| @task_false.push(task) if task.status == false }
+  #   tasks.each {|task| @task_true.push(task) if task.status == true }
+  # end
   
+  def show
+    @comment = Comment.new
+    task = Task.find(params[:id])
+    comments = Comment.all
+
+    # 指定の「task_id」持ちのコメント一覧を取得
+    @contents = []
+    comments.each {|i| @contents.push(i) if i.task_id == task.id }
+  end
+
   # taskのチェックボックスクリック時にステータスを変更
   def toggle
-    # b = session[:user_id]
-    # binding.irb
-    # @user = User.find(params[:id])
     @task = Task.find(params[:id])
     # task_list = @task.task_list_id
     
@@ -48,7 +55,6 @@ class TasksController < ApplicationController
     
     # render nothing: true
     # 上記のrenderはrails5から使えなくなったので下記の方法を利用
-
     redirect_to task_list_path(@task.task_list_id)
 
   end

@@ -1,15 +1,7 @@
-<h1>Comments</h1>
+<div>Comments</div>
 <%= form_with(model: @comment, local: true) do |f| %>
     <%= f.label :コメントの追加 %>
     <%= f.text_field :content %>
-
-    <%= f.hidden_field :id, :value => params[:id] %>
     
     <%= f.submit "作成", class: "btn btn-primary" %>
-<% end %>
-
-<% @contents.each do |content| %>
-    <p><%= content.user.name %></p>
-    <p><%= content.content %></p>
-    <hr>
 <% end %>
