@@ -11,5 +11,6 @@
 <% @contents.each do |content| %>
     <p><%= content.user.name %></p>
     <p><%= content.content %></p>
+    <%= link_to 'delete', comment_path(content.id), method: :delete %>
     <hr>
 <% end %>

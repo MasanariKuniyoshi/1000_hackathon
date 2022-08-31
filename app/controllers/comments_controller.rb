@@ -1,14 +1,5 @@
 class CommentsController < ApplicationController
 
-    # def show
-    #     @comment = Comment.new
-    #     task = Task.find(params[:id])
-    #     comments = Comment.all
-
-    #     @contents = []
-    #     comments.each {|i| @contents.push(i) if i.task_id == task.id }
-    # end
-
     def create
         # ユーザーのログイン状態の判定
         if logged_in?
@@ -25,9 +16,17 @@ class CommentsController < ApplicationController
         end
     end
 
+    def destroy
+        @comment = current_user.comments.find_by(id: params[:id])
+        task_id = @comment.task.id
+
+        @comment.destroy
+        binding.pry
+        redirect_back fallback_location: task_path(task_id)
+    end
+
     private
         def comment_params
             params.require(:comment).permit(:content)
         end
-        
 end
