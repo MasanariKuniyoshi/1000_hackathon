@@ -16,12 +16,19 @@ class CommentsController < ApplicationController
         end
     end
 
+    def update
+        @comment = current_user.comments.find_by(id: params[:id])
+        task_id = @comment.task.id
+
+        @comment.update(content: params[:content])
+        redirect_back fallback_location: task_path(task_id)
+    end
+
     def destroy
         @comment = current_user.comments.find_by(id: params[:id])
         task_id = @comment.task.id
 
         @comment.destroy
-        binding.pry
         redirect_back fallback_location: task_path(task_id)
     end
 
