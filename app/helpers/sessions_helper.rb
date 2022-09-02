@@ -7,9 +7,14 @@ module SessionsHelper
   
   # 現在ログイン中のユーザーを返す（いる場合）
   def current_user
-    if session[:user_id]
-      @current_user ||= User.find_by(id: session[:user_id])
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
     end
+  end
+
+  # 渡されたユーザーがカレントユーザーなのか確認
+  def current_user?(user)
+    user && user == current_user
   end
   
   # ユーザーがログインしていればtrue、その他ならfalseを返す

@@ -1,0 +1,49 @@
+<h1>Comments</h1>
+<%= form_with(model: @comment, local: true) do |f| %>
+    <%= f.label :コメントの追加 %>
+    <%= f.text_field :content %>
+
+    <%= f.hidden_field :id, :value => params[:id] %>
+    
+    <%= f.submit "作成", class: "btn btn-primary" %>
+<% end %>
+
+<% @contents.each do |content| %>
+    <div>
+        <p><%= content.user.name %></p>
+        <p><%= content.content %></p>
+
+        <% if current_user?(content.user) %>
+            <button class="edit_button">edit</button>
+
+            <%= form_with(local: true, url: comment_path(content), method: :patch, class: 'edit_form') do |f| %>
+                <%= f.text_field :content %>
+                <input type="button" class="edit_close" value="キャンセル">
+                <%= f.submit "更新" ,class: "btn btn-green" %>
+            <% end %>
+            <%= link_to 'delete', comment_path(content), method: :delete %>
+        <% end %>
+        <hr>
+    </div>
+<% end %>
+
+<script>
+    // editボタンクリック時
+    $('.edit_button').click(function(){
+        // editボタン・コメントを非表示
+        $(this).prev().hide();
+        $(this).hide();
+
+        // edit_formの表示
+        $(this).next('.edit_form').show();
+    })
+
+    // キャンセルボタンクリック時
+    $('.edit_close').click(function(){
+        // edit_formの表示
+        $(this).parent('.edit_form').hide();
+
+        // editボタン・コメントを表示
+        $(this).parent().prevAll().show();
+    })
+</script>
