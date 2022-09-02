@@ -11,6 +11,11 @@ module SessionsHelper
       @current_user ||= User.find_by(id: user_id)
     end
   end
+
+  # 渡されたユーザーがカレントユーザーなのか確認
+  def current_user?(user)
+    user && user == current_user
+  end
   
   # ユーザーがログインしていればtrue、その他ならfalseを返す
   def logged_in?

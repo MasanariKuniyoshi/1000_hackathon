@@ -17,17 +17,21 @@ class CommentsController < ApplicationController
     end
 
     def update
+        # レコードの取得
         @comment = current_user.comments.find_by(id: params[:id])
         task_id = @comment.task.id
 
+        # レコードの更新
         @comment.update(content: params[:content])
         redirect_back fallback_location: task_path(task_id)
     end
 
     def destroy
+        # レコードの取得
         @comment = current_user.comments.find_by(id: params[:id])
         task_id = @comment.task.id
 
+        # レコードの削除
         @comment.destroy
         redirect_back fallback_location: task_path(task_id)
     end
