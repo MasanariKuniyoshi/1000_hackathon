@@ -1,3 +1,4 @@
+<h1>タスクリスト</h1>
 <%= form_with(model: @task, local: true) do |f| %>
     <%= f.label :タスクの追加 %>
     <%= f.text_field :content %>
@@ -7,11 +8,18 @@
     <%= f.submit "作成", class: "btn btn-primary" %>
 <% end %>
 
-<h1>未処理タスク</h1>
-<% @task_false.each do |task| %>
-  <div><%= check_box_tag '', '', task.status, {'data-id' => task.id} %> <%= link_to task.content, task_path(task.id) %></div>
+<% if have_task?(@task_false) %>
+  <h1>未処理タスク</h1>
+  <% @task_false.each do |task| %>
+    <div><%= check_box_tag '', '', task.status, {'data-id' => task.id} %> <%= link_to task.content, task_path(task.id) %></div>
+  <% end %>
+<% else %>
+  <p>現在タスクはありません。</p>
 <% end %>
-<h1>終了タスク</h1>
-<% @task_true.each do |task| %>
-  <div><%= check_box_tag '', '', task.status, {'data-id' => task.id} %> <%= link_to task.content, task_path(task.id) %></div>
+
+<% if have_task?(@task_true) %>
+  <h1>終了タスク</h1>
+  <% @task_true.each do |task| %>
+    <div><%= check_box_tag '', '', task.status, {'data-id' => task.id} %> <%= link_to task.content, task_path(task.id) %></div>
+  <% end %>
 <% end %>

@@ -1,0 +1,18 @@
+<% @comments.each do |comment| %>
+    <div>
+        <p><%= comment.user.name %></p>
+        <p><%= comment.content %></p>
+
+        <% if current_user?(comment.user) %>
+            <button class="edit_button">edit</button>
+
+            <%= form_with(local: true, url: comment_path(comment), method: :patch, class: 'edit_form') do |f| %>
+                <%= f.text_field :content %>
+                <input type="button" class="edit_close" value="キャンセル">
+                <%= f.submit "更新" ,class: "btn btn-green" %>
+            <% end %>
+            <%= link_to 'delete', comment_path(comment), method: :delete %>
+        <% end %>
+        <hr>
+    </div>
+<% end %>

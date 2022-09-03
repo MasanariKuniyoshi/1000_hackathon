@@ -37,11 +37,11 @@ class TasksController < ApplicationController
   def show
     @comment = Comment.new
     task = Task.find(params[:id])
-    comments = Comment.all
+    com = Comment.all
 
     # 指定の「task_id」持ちのコメント一覧を取得
-    @contents = []
-    comments.each {|i| @contents.push(i) if i.task_id == task.id }
+    @comments = []
+    com.each {|i| @comments.push(i) if i.task_id == task.id }
   end
 
   # taskのチェックボックスクリック時にステータスを変更
