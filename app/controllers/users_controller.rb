@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in(@user)
       flash[:success ] = "Welcome to your Task list!"
-      redirect_to @user
+      redirect_to task_lists_path
     else
       render 'new'
     end
